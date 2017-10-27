@@ -1,7 +1,6 @@
 // @flow
 
-import moxios from 'moxios';
-import { setSearchTerm, addAPIData, getAPIDetails } from '../actionCreators';
+import { setSearchTerm, addAPIData } from '../actionCreators';
 
 const oitnb = {
   rating: '0.8',
@@ -19,24 +18,4 @@ test('setSearchTerm', () => {
 
 test('addAPIData', () => {
   expect(addAPIData(oitnb)).toMatchSnapshot();
-});
-
-test('getAPIDetails', (done: Function) => {
-  const dispatchMock = jest.fn();
-  moxios.withMock(() => {
-    getAPIDetails(oitnb.imdbID)(dispatchMock);
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request
-        .respondWith({
-          status: 200,
-          response: oitnb
-        })
-        .then(() => {
-          expect(request.url).toEqual(`http://localhost:3000/${oitnb.imdbID}`);
-          expect(dispatchMock).toBeCalledWith(addAPIData(oitnb));
-          done();
-        });
-    });
-  });
 });

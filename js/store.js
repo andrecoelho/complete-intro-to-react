@@ -1,14 +1,19 @@
 // @flow
 
 import { createStore, compose, applyMiddleware } from 'redux'; // add applyMiddleware
-import thunk from 'redux-thunk'; // import
+import { createEpicMiddleware } from 'redux-observable';
+import { Observable } from 'rxjs/Observable';
+
 import rootReducer from './reducers';
+import rootEpic from './epics';
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(thunk), // middleware
-    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    applyMiddleware(createEpicMiddleware(rootEpic, { dependencies: Observable })), // middleware
+    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+      ? window.devToolsExtension()
+      : f => f
   )
 );
 
