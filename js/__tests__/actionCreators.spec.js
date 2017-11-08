@@ -1,6 +1,6 @@
 // @flow
 
-import { setSearchTerm, addAPIData } from '../actionCreators';
+import { setSearchTerm, addAPIData, getAPIDetails } from '../actionCreators';
 
 const oitnb = {
   rating: '0.8',
@@ -18,4 +18,8 @@ test('setSearchTerm', () => {
 
 test('addAPIData', () => {
   expect(addAPIData(oitnb)).toMatchSnapshot();
+});
+
+test('getAPIDetails', () => {
+  expect(getAPIDetails(oitnb.imdbID)).toMatchSnapshot();
 });

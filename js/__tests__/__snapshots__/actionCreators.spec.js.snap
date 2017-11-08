@@ -15,6 +15,13 @@ Object {
 }
 `;
 
+exports[`getAPIDetails 1`] = `
+Object {
+  "payload": "tt2372162",
+  "type": "GET_API_DETAILS",
+}
+`;
+
 exports[`setSearchTerm 1`] = `
 Object {
   "payload": "New York",
